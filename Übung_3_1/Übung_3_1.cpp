@@ -4,7 +4,6 @@ using namespace std;
 int main()
 {
     int d = 0;
-    int a = 8;
     cout << "Bitte geben sie eine Dezimalzahl zwischen [0,128] ein.";
     cin >> d;
 
