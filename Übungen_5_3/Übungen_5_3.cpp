@@ -10,6 +10,8 @@ char Player = 'P';
 char Gegner = 'E';
 bool tot = false;
 bool gew = false;
+bool unt = false;
+
 
 void Ausgabe() {
     for (int i = 0; i <= 26; i++) {
@@ -27,6 +29,12 @@ void GameOver() {
 
 int main()
 {
+
+	int p1 = 0;
+	int p2 = 0;
+	int e1 = 0;
+	int e2 = 0;
+
     srand(static_cast<unsigned>(time(0)));
 
 
@@ -47,21 +55,21 @@ int main()
     }
     // leeres Spielfeld
 
-    int p1 = ZufallszahlI(1, 25);
-    int p2 = ZufallszahlI(1, 50);
-    int e1 = ZufallszahlI(1, 25);
-    int e2 = ZufallszahlI(1, 50);
-
-    if (e1 != e2 && p1 != p2) {
-        Feld[p1][p2] = 'P';
-        Feld[e1][e2] = 'E';
-    }
-    else {
-        int p1 = ZufallszahlI(1, 25);
-        int p2 = ZufallszahlI(1, 50);
-        int e1 = ZufallszahlI(1, 25);
-        int e2 = ZufallszahlI(1, 50);
-    }
+	while (unt == false) {
+		if(e1!=p1 || e2!=p2){
+			Feld[p1][p2] = 'P';
+			Feld[e1][e2] = 'E';
+			unt = true;
+			break;
+		}
+		else {
+			p1 = ZufallszahlI(1, 25);
+			p2 = ZufallszahlI(1, 50);
+			e1 = ZufallszahlI(1, 25);
+			e2 = ZufallszahlI(1, 50);
+			unt = false;
+		}
+	}
     // Spieler und Enemie auf Random Pos. aber nicht die selben
 
 	while (tot == false) {
