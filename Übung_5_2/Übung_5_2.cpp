@@ -20,7 +20,6 @@ int main()
 
     for (int i = 0; i < 101; i++) {
         arr1[i] = ZufallszahlI(1, 10);
-
         switch (arr1[i]) {
         case 1: arr2[0] += 1;
             break;
