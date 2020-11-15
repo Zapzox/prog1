@@ -27,7 +27,6 @@ void Ausgabe() {
         }
         cout << endl;
     }
-	timer -= 1;
 }
 
 void GameOver() {
@@ -200,15 +199,16 @@ int main()
 						planted = true;
 						b1 = p1;
 						b2 = p2;
-						if (timer == 0) {
-							Explode(b1, b2);
-						}
+						
 					}
 				}
 			}
 			//Player movement und Bomb planted
-
-			
+			timer -= 1;
+			if (timer == 0) {
+				Explode(b1, b2);
+				timer = 100;
+			}
 
 				//this_thread::sleep_for(chrono::seconds(1));
 			if (e1 != 26 && e1 != 0 && e2 != 51 && e2 != 0) {
