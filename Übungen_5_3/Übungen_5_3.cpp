@@ -17,15 +17,17 @@ bool planted = false;
 bool tot = false;
 bool gew = false;
 bool unt = false;
-
+int timer = 100;
 
 void Ausgabe() {
+	system("cls");
     for (int i = 0; i <= 26; i++) {
         for (int j = 0; j <= 51; j++) {
             cout << Feld[i][j];
         }
         cout << endl;
     }
+	timer -= 1;
 }
 
 void GameOver() {
@@ -42,11 +44,58 @@ void Win() {
 	this_thread::sleep_for(chrono::seconds(1));
 }
 
-void Explode(int b1,int b2) {
-	this_thread::sleep_for(chrono::seconds(3));
-	if (b1 != 26 && b1 != 0 && b2 != 51 && b2 != 0) {
-
+bool check(bool t1, bool t2) {
+	if (t1 != 26 && t1 != 0 && t2 != 51 && t2 != 0) {
+		return true;
 	}
+	else {
+		return false;
+	}
+}
+
+void Explode(int b1,int b2) {
+	int ex1 = b1;
+	int ex2 = b2;
+	//this_thread::sleep_for(chrono::seconds(3));
+	if (check(b1, b2) == true) {
+		Feld[b1][b2] = 'O';
+		b1 -= 1;
+	}
+	if (check(b1, b2) == true) {
+		Feld[b1][b2] = 'O';
+		b1 -= 1;
+	}
+	if (check(b1, b2) == true) {
+		Feld[b1][b2] = 'O';
+		b1 = ex1;
+		b1 += 1;
+	}
+	if (check(b1, b2) == true) {
+		Feld[b1][b2] = 'O';
+		b1 += 1;
+	}
+	if (check(b1, b2) == true) {
+		Feld[b1][b2] = 'O';
+		b1 = ex1;
+		b2 -= 1;
+	}
+	if (check(b1, b2) == true) {
+		Feld[b1][b2] = 'O';
+		b2 -= 1;
+	}
+	if (check(b1, b2) == true) {
+		Feld[b1][b2] = 'O';
+		b2 = ex2;
+		b2 += 1;
+	}
+	if (check(b1, b2) == true) {
+		Feld[b1][b2] = 'O';
+		b2 += 1;
+	}
+	if (check(b1, b2) == true) {
+		Feld[b1][b2] = 'O';
+	}
+	Ausgabe();
 }
 
 int main()
@@ -147,15 +196,19 @@ int main()
 						}
 					}
 					else if (input == ' ') {
+						
 						planted = true;
 						b1 = p1;
 						b2 = p2;
+						if (timer == 0) {
+							Explode(b1, b2);
+						}
 					}
 				}
 			}
 			//Player movement und Bomb planted
 
-			Explode(b1,b2);
+			
 
 				//this_thread::sleep_for(chrono::seconds(1));
 			if (e1 != 26 && e1 != 0 && e2 != 51 && e2 != 0) {
@@ -194,7 +247,6 @@ int main()
 				}
 			}
 			// Enemie movement
-			system("cls");
 
 			Ausgabe();
 		}
