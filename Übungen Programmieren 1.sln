@@ -31,7 +31,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Übung_5_1", "Übung_5_1\Ü
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Übung_5_2", "Übung_5_2\Übung_5_2.vcxproj", "{BB854BD8-0D47-41CF-9F40-15A966B54EB6}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Übungen_5_3", "Übungen_5_3\Übungen_5_3.vcxproj", "{912409E9-D280-4016-9678-18045E965ED0}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Übung_5_3", "Übungen_5_3\Übungen_5_3.vcxproj", "{912409E9-D280-4016-9678-18045E965ED0}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GE-Zoom", "GE-Zoom\GE-Zoom.vcxproj", "{C5D51EDC-21A2-4855-96B2-B79BB4D85282}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -161,6 +163,14 @@ Global
 		{912409E9-D280-4016-9678-18045E965ED0}.Release|x64.Build.0 = Release|x64
 		{912409E9-D280-4016-9678-18045E965ED0}.Release|x86.ActiveCfg = Release|Win32
 		{912409E9-D280-4016-9678-18045E965ED0}.Release|x86.Build.0 = Release|Win32
+		{C5D51EDC-21A2-4855-96B2-B79BB4D85282}.Debug|x64.ActiveCfg = Debug|x64
+		{C5D51EDC-21A2-4855-96B2-B79BB4D85282}.Debug|x64.Build.0 = Debug|x64
+		{C5D51EDC-21A2-4855-96B2-B79BB4D85282}.Debug|x86.ActiveCfg = Debug|Win32
+		{C5D51EDC-21A2-4855-96B2-B79BB4D85282}.Debug|x86.Build.0 = Debug|Win32
+		{C5D51EDC-21A2-4855-96B2-B79BB4D85282}.Release|x64.ActiveCfg = Release|x64
+		{C5D51EDC-21A2-4855-96B2-B79BB4D85282}.Release|x64.Build.0 = Release|x64
+		{C5D51EDC-21A2-4855-96B2-B79BB4D85282}.Release|x86.ActiveCfg = Release|Win32
+		{C5D51EDC-21A2-4855-96B2-B79BB4D85282}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -61,4 +61,6 @@ int main()
         }
     }
     cout << "Modalwert:" << e << endl;
+
+    return 0;
 }
