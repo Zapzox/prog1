@@ -6,6 +6,7 @@
 #include <conio.h>
 #include <ctype.h>
 #include <windows.h>
+#include <cstdlib>
 #include "Header.h"
 
 using namespace std;
@@ -50,18 +51,30 @@ void Ausgabe() {
     }
 }
 
+bool GameStart() {
+	char a;
+	cout << "Willkommen bei Bomberman!" << endl << endl << "Wollen Sie das Spiel starten?" << endl << "Geben Sie y fuer 'JA' und n fuer 'NEIN' ein." << endl;
+	cin >> a;
+	if (a=='y') {
+		return true;
+	}
+	else if (a=='n') {
+		return false;
+	}
+}
+
 void GameOver() {
 	system("cls");
 	cout << "GAME OVER";
 	tot = true;
-	this_thread::sleep_for(chrono::seconds(1));
+	this_thread::sleep_for(chrono::seconds(5));
 }
 
 void Win() {
 	system("cls");
 	cout << "YOU WON";
 	gew = true;
-	this_thread::sleep_for(chrono::seconds(1));
+	this_thread::sleep_for(chrono::seconds(5));
 }
 
 bool check(bool t1, bool t2) {
@@ -105,6 +118,18 @@ void eCheck(int e1, int e2, bool coll, bool bhit) {
 	}
 }
 
+void bCheck(int b1, int b2) {
+	if (Feld[b1][b2]=='P') {
+		GameOver();
+	}
+	else if(Feld[b1][b2] == 'E'){
+		Win();
+	}
+	else if (Feld[b1][b2] == ' ') {
+		Feld[b1][b2] = 'O';
+	}
+}
+
 void ShowConsoleCursor(bool showFlag)
 {
 	HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -128,42 +153,42 @@ void Explode(int b1,int b2) {
 	int ex2 = b2;
 	//this_thread::sleep_for(chrono::seconds(3));
 	if (check(b1, b2) == true) {
-		Feld[b1][b2] = 'O';
+		bCheck(b1,b2);
 		b1 -= 1;
 	}
 	if (check(b1, b2) == true) {
-		Feld[b1][b2] = 'O';
+		bCheck(b1, b2);
 		b1 -= 1;
 	}
 	if (check(b1, b2) == true) {
-		Feld[b1][b2] = 'O';
+		bCheck(b1, b2);
 		b1 = ex1;
 		b1 += 1;
 	}
 	if (check(b1, b2) == true) {
-		Feld[b1][b2] = 'O';
+		bCheck(b1, b2);
 		b1 += 1;
 	}
 	if (check(b1, b2) == true) {
-		Feld[b1][b2] = 'O';
+		bCheck(b1, b2);
 		b1 = ex1;
 		b2 -= 1;
 	}
 	if (check(b1, b2) == true) {
-		Feld[b1][b2] = 'O';
+		bCheck(b1, b2);
 		b2 -= 1;
 	}
 	if (check(b1, b2) == true) {
-		Feld[b1][b2] = 'O';
+		bCheck(b1, b2);
 		b2 = ex2;
 		b2 += 1;
 	}
 	if (check(b1, b2) == true) {
-		Feld[b1][b2] = 'O';
+		bCheck(b1, b2);
 		b2 += 1;
 	}
 	if (check(b1, b2) == true) {
-		Feld[b1][b2] = 'O';
+		bCheck(b1, b2);
 	}
 	planted = false;
 	Ausgabe();
@@ -203,165 +228,166 @@ bool BombHit(int bh1, int bh2, int r) {
 
 int main()
 {
+	if (GameStart() == true) {
+		ShowConsoleCursor(false);
 
-	ShowConsoleCursor(false);
-
-	int p1 = 0;
-	int p2 = 0;
-	int e1 = 0;
-	int e2 = 0;
-	int b1 = 0;
-	int b2 = 0;
-
-
-    srand(static_cast<unsigned>(time(0)));
+		int p1 = 0;
+		int p2 = 0;
+		int e1 = 0;
+		int e2 = 0;
+		int b1 = 0;
+		int b2 = 0;
 
 
-	leeresFeld();
-    // leeres Spielfeld
+		srand(static_cast<unsigned>(time(0)));
 
-	while (unt == false) {
-		if(e1!=p1 || e2!=p2){
-			Feld[p1][p2] = 'P';
-			Feld[e1][e2] = 'E';
-			unt = true;
-			break;
+
+		leeresFeld();
+		// leeres Spielfeld
+
+		while (unt == false) {
+			if (e1 != p1 || e2 != p2) {
+				Feld[p1][p2] = 'P';
+				Feld[e1][e2] = 'E';
+				unt = true;
+				break;
+			}
+			else {
+				p1 = ZufallszahlI(1, 25);
+				p2 = ZufallszahlI(1, 50);
+				e1 = ZufallszahlI(1, 25);
+				e2 = ZufallszahlI(1, 50);
+				unt = false;
+			}
 		}
-		else {
-			p1 = ZufallszahlI(1, 25);
-			p2 = ZufallszahlI(1, 50);
-			e1 = ZufallszahlI(1, 25);
-			e2 = ZufallszahlI(1, 50);
-			unt = false;
-		}
-	}
-    // Spieler und Enemie auf Random Pos. aber nicht die selben
+		// Spieler und Enemie auf Random Pos. aber nicht die selben
 
-	Ausgabe();
+		Ausgabe();
 
-	while (tot == false && gew == false) {
-		int press = _kbhit();
-		if (press == true) {
-			if (crash(e1, e2, p1, p2) == false) {
-				//cout << e1 << "=" << p1 << " | " << e2 << "=" << p2;
-				char input = _getch();
-				if (p1 != 26 && p1 != 0 && p2 != 51 && p2 != 0) {
-					if (input == 'w') {
-						if (p1 != 1) {
-							Feld[p1][p2] = ' ';
-							p1 -= 1;
-							pCheck(p1, p2, crash(e1,e2,p1,p2), BombHit(p1,p2,1));
-						}
-						if (planted == true) {
-							Feld[b1][b2] = 'X';
-						}
-					}
-					else if (input == 'a') {
-						if (p2 != 1) {
-							Feld[p1][p2] = ' ';
-							p2 -= 1;
-							pCheck(p1, p2, crash(e1, e2, p1, p2), BombHit(p1, p2, 1));
-						}
-						if (planted == true) {
-							Feld[b1][b2] = 'X';
-						}
-					}
-					else if (input == 's') {
-						if (p1 != 25) {
-							Feld[p1][p2] = ' ';
-							p1 += 1;
-							pCheck(p1, p2, crash(e1, e2, p1, p2), BombHit(p1, p2, 1));
-						}
-						if (planted == true) {
-							Feld[b1][b2] = 'X';
-						}
-					}
-					else if (input == 'd') {
-						if (p2 != 50) {
-							Feld[p1][p2] = ' ';
-							p2 += 1;
-							pCheck(p1, p2, crash(e1, e2, p1, p2), BombHit(p1, p2, 1));
-						}
-						if (planted == true) {
-							Feld[b1][b2] = 'X';
-						}
-					}
-					else if (input == ' ') {
-						if (planted == false) {
-							planted = true;
-							b1 = p1;
-							b2 = p2;
-						}
-					}
-				}
-
-				//Player movement und Bomb planted
-				if (planted == true) {
-					timer -= 1;
-					if (timer == 0) {
-						Explode(b1, b2);
-						timer = 10;
-						countdown = true;
-					}
-				}
-
-				if (countdown == true) {
-					ctimer -= 1;
-					if (ctimer == 0) {
-						countdown = false;
-						clear(e1,e2,p1,p2);
-						ctimer = 10;
-					}
-				}
-
+		while (tot == false && gew == false) {
+			int press = _kbhit();
+			if (press == true) {
 				if (crash(e1, e2, p1, p2) == false) {
-					//this_thread::sleep_for(chrono::seconds(1));
-					if (e1 != 26 && e1 != 0 && e2 != 51 && e2 != 0) {
-
-						int r = ZufallszahlI(1, 4);
-
-						switch (r) {
-						case 1:
-							if (e1 != 1) {
-								Feld[e1][e2] = ' ';
-								e1 -= 1;
-								eCheck(e1, e2, crash(e1, e2, p1, p2), BombHit(e1, e2, 1));
-								break;
+					//cout << e1 << "=" << p1 << " | " << e2 << "=" << p2;
+					char input = _getch();
+					if (p1 != 26 && p1 != 0 && p2 != 51 && p2 != 0) {
+						if (input == 'w') {
+							if (p1 != 1) {
+								Feld[p1][p2] = ' ';
+								p1 -= 1;
+								pCheck(p1, p2, crash(e1, e2, p1, p2), BombHit(p1, p2, 1));
 							}
-						case 2:
-							if (e2 != 50) {
-								Feld[e1][e2] = ' ';
-								e2 += 1;
-								eCheck(e1, e2, crash(e1, e2, p1, p2), BombHit(e1, e2, 1));
-								break;
-							}
-						case 3:
-							if (e1 != 25) {
-								Feld[e1][e2] = ' ';
-								e1 += 1;
-								eCheck(e1, e2, crash(e1, e2, p1, p2), BombHit(e1, e2, 1));
-								break;
-							}
-						case 4:
-							if (e2 != 1) {
-								Feld[e1][e2] = ' ';
-								e2 -= 1;
-								eCheck(e1, e2, crash(e1, e2, p1, p2), BombHit(e1, e2, 1));
-								break;
+							if (planted == true) {
+								Feld[b1][b2] = 'X';
 							}
 						}
+						else if (input == 'a') {
+							if (p2 != 1) {
+								Feld[p1][p2] = ' ';
+								p2 -= 1;
+								pCheck(p1, p2, crash(e1, e2, p1, p2), BombHit(p1, p2, 1));
+							}
+							if (planted == true) {
+								Feld[b1][b2] = 'X';
+							}
+						}
+						else if (input == 's') {
+							if (p1 != 25) {
+								Feld[p1][p2] = ' ';
+								p1 += 1;
+								pCheck(p1, p2, crash(e1, e2, p1, p2), BombHit(p1, p2, 1));
+							}
+							if (planted == true) {
+								Feld[b1][b2] = 'X';
+							}
+						}
+						else if (input == 'd') {
+							if (p2 != 50) {
+								Feld[p1][p2] = ' ';
+								p2 += 1;
+								pCheck(p1, p2, crash(e1, e2, p1, p2), BombHit(p1, p2, 1));
+							}
+							if (planted == true) {
+								Feld[b1][b2] = 'X';
+							}
+						}
+						else if (input == ' ') {
+							if (planted == false) {
+								planted = true;
+								b1 = p1;
+								b2 = p2;
+							}
+						}
+					}
+
+					//Player movement und Bomb planted
+					if (planted == true) {
+						timer -= 1;
+						if (timer == 0) {
+							Explode(b1, b2);
+							timer = 10;
+							countdown = true;
+						}
+					}
+
+					if (countdown == true) {
+						ctimer -= 1;
+						if (ctimer == 0) {
+							countdown = false;
+							clear(e1, e2, p1, p2);
+							ctimer = 10;
+						}
+					}
+
+					if (crash(e1, e2, p1, p2) == false) {
+						//this_thread::sleep_for(chrono::seconds(1));
+						if (e1 != 26 && e1 != 0 && e2 != 51 && e2 != 0) {
+
+							int r = ZufallszahlI(1, 4);
+
+							switch (r) {
+							case 1:
+								if (e1 != 1) {
+									Feld[e1][e2] = ' ';
+									e1 -= 1;
+									eCheck(e1, e2, crash(e1, e2, p1, p2), BombHit(e1, e2, 1));
+									break;
+								}
+							case 2:
+								if (e2 != 50) {
+									Feld[e1][e2] = ' ';
+									e2 += 1;
+									eCheck(e1, e2, crash(e1, e2, p1, p2), BombHit(e1, e2, 1));
+									break;
+								}
+							case 3:
+								if (e1 != 25) {
+									Feld[e1][e2] = ' ';
+									e1 += 1;
+									eCheck(e1, e2, crash(e1, e2, p1, p2), BombHit(e1, e2, 1));
+									break;
+								}
+							case 4:
+								if (e2 != 1) {
+									Feld[e1][e2] = ' ';
+									e2 -= 1;
+									eCheck(e1, e2, crash(e1, e2, p1, p2), BombHit(e1, e2, 1));
+									break;
+								}
+							}
+						}
+					}
+					else {
+						GameOver();
+					}
+					// Enemie movement
+					if (tot == false && gew == false) {
+						Ausgabe();
 					}
 				}
 				else {
 					GameOver();
 				}
-				// Enemie movement
-				if (tot == false && gew == false) {
-					Ausgabe();
-				}
-			}
-			else {
-				GameOver();
 			}
 		}
 	}
