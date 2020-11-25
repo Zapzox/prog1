@@ -4,29 +4,38 @@
 
 using namespace std;
 
-float GB(float g) {
+float ValGB(float G) {
 	float e;
-	e = g / 360 * 2 * M_PI;
+	e = G / 360 * 2 * M_PI;
 	return e;
 }
 
-float BG(float b) {
+float ValBG(float B) {
 	float e;
-	e = b / M_PI * 180;
+	e = B / M_PI * 180;
 	return e;
+}
+
+void RefRefGB(float &RefG) {
+	RefG = RefG / 360 * 2 * M_PI;
+}
+
+void RefRefBG(float &RefB) {
+	RefB = RefB / M_PI * 180;
+}
+
+void RefZeiGB(float* ZeigG) {
+	*ZeigG = *ZeigG / 360 * 2 * M_PI;
+}
+
+void RefZeiBG(float* ZeigB) {
+	*ZeigB = *ZeigB / M_PI * 180;
 }
 
 int main()
 {
 	std::locale::global(std::locale("German_germany.UTF-8"));
 
-	int a;
-	cout << "|Winkelmaß von Grad nach Bogenmaß umrechnen|" << endl << endl
-		<< "Welche Version wollen Sie verwenden?" << endl
-		<< "(1) Call By Value" << endl << "(2) Call by Reference" << endl;
-	cin >> a;
-
-	if (a==1) {
 		system("cls");
 
 		int a;
@@ -36,59 +45,38 @@ int main()
 		cin >> a;
 
 		if (a == 1) {
-			float g;
+			float g1;
 
 			system("cls");
 			cout << "Grad --> Bogenmaß" << endl << endl
 				<< "Geben Sie ihren Winkel ein:" << endl;
-			cin >> g;
+			cin >> g1;
+			float g2 = g1;
+			float g3 = g1;
 
-			cout << "Winkel im Bogenmaß:" << GB(g) << "°";
+			cout << "Winkel im Bogenmaß (Value):" << ValGB(g1) << "°" << endl;
+			RefRefGB(g2);
+			cout << "Winkel im Bogenmaß (Referenz):" << g2 << "°" << endl;
+			RefZeiGB(&g3);
+			cout << "Winkel im Bogenmaß (Zeiger):" << g3 << "°";
+
 		}
 		else if (a == 2) {
-			float b;
+			float b1;
 
 			system("cls");
 			cout << "Bogenmaß --> Gradmaß" << endl << endl
 				<< "Geben Sie ihren Winkel ein:" << endl;
-			cin >> b;
+			cin >> b1;
+			float b2 = b1;
+			float b3 = b1;
 
-			cout << "Winkel im Gradmaß:" << BG(b) << "°";
+			cout << "Winkel im Gradmaß (Value):" << ValBG(b1) << "°" << endl;
+			RefRefBG(b2);
+			cout << "Winkel im Gradmaß (Referenz):" << b2 << "°" << endl;
+			RefZeiBG(&b3);
+			cout << "Winkel im Gradmaß (Zeiger)	:" << b3 << "°";
 		}
-	}
-	// Call By Value ----------------------------------------------------------------------------
-
-	if (a==2) {
-		system("cls");
-
-		int a;
-		cout << "|Winkelmaß von Grad nach Bogenmaß umrechnen|" << endl << endl
-			<< "In welche Richtung wollen Sie umrechnen?" << endl
-			<< "(1) Grad --> Bogenmaß" << endl << "(2) Bogenmaß --> Gradmaß" << endl;
-		cin >> a;
-
-		if (a == 1) {
-			float g;
-
-			system("cls");
-			cout << "Grad --> Bogenmaß" << endl << endl
-				<< "Geben Sie ihren Winkel ein:" << endl;
-			cin >> g;
-
-			float& Referenz = g;
-			cout << "Winkel im Bogenmaß:" << GB(Referenz) << "°";
-		}
-		else if (a == 2) {
-			float b;
-
-			system("cls");
-			cout << "Bogenmaß --> Gradmaß" << endl << endl
-				<< "Geben Sie ihren Winkel ein:" << endl;
-			cin >> b;
-
-			float& Referenz = b;
-			cout << "Winkel im Gradmaß:" << BG(Referenz) << "°";
-		}
-	}
-	// Call By Referenz ----------------------------------------------------------------------------
+	
+	return 0;
 }

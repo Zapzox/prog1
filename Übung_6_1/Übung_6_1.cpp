@@ -20,4 +20,6 @@ int main()
     cout << endl;
     cout << "ReferenzEinerVariable:" << &ReferenzEinerVariable << endl << "eineVariable:" << &eineVariable;
     cout << endl;
+
+    return 0;
 }
