@@ -1,15 +1,18 @@
 #pragma once
 //Deklaration
 
-class Rechner {
+namespace Statistik {
+	class Rechner {
 
-public:
-	Rechner();
-	void SetterArr(int Eingabe[], int länge);
+	public:
+		Rechner();
+		void SetterArr(long Eingabe[], int länge);
 
-private:
-	void GeoM(int Eingabe[], int länge);
-	void Mod(int Eingabe[], int länge);
-	void Ausgabe(int Eingabe[], int länge);
+	private:
+		void GeoM(long Eingabe[], int länge);
+		void Mod(long Eingabe[], int länge);
+		int AnzahlArr(long Eingabe[], int länge, int wert);
+		void Ausgabe(long Eingabe[], int länge);
 
-};
+	};
+}
