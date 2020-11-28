@@ -38,27 +38,43 @@ void Rechner::GeoM(long Eingabe[], int länge) {
 }
 
 void Rechner::Mod(long Eingabe[], int länge) {
-	int EWert = 0;
-	int EAnz = 0;
+	int term = 2;
 
-	for (int k = 0; k < länge; k++) {
-		if (AnzahlArr(Eingabe, länge, *Eingabe) == 0) {
-			cout << "Zahl:" << EWert << " Anzahl:" << EAnz << endl;
-		}
-		else {
-			int e1 = AnzahlArr(Eingabe, länge, *Eingabe);
-			int e2 = AnzahlArr(Eingabe, länge, *Eingabe++);
+	while (term != 0) {
+		int wert = *Eingabe;
+		int term = AnzahlArr(Eingabe, länge, wert);
+		cout << *Eingabe << term;
+		Eingabe++;
+		term--;
+	}
+	
+	/*int EWert = 0;
+	int EAnz = 0;
+	int term = AnzahlArr(Eingabe, länge, *Eingabe);
+
+		while (term != 0) {
+		int e1 = 0;
+		int e2 = 0;
+
+			e1 = AnzahlArr(Eingabe, länge, *Eingabe);
+			e2 = AnzahlArr(Eingabe, länge, *Eingabe++);
 			if (e1 < e2) {
 				EAnz = e2;
 				EWert = *Eingabe++;
+				cout << EWert << endl;
 			}
 			else {
 				EAnz = e1;
 				EWert = *Eingabe;
+				cout << EWert << endl;
 			}
 			Eingabe++;
 		}
+		cout << "Zahl:" << EWert << " Anzahl:" << EAnz << endl;
 	}
+
+
+
 	/*long* Anf = Eingabe;
 	int max = *Eingabe;
 	Eingabe++;
@@ -98,18 +114,17 @@ void Rechner::Mod(long Eingabe[], int länge) {
 			e2 = 0;
 		}
 	}*/
-	
-}
 
-int Rechner::AnzahlArr(long Eingabe[], int länge, int wert) {
+
+}
+int Rechner::AnzahlArr(long Test[], int länge, int wert) {
 	int anz = 0;
-	cout << Eingabe << " : " << *Eingabe<< endl;
 	for (int j = 0; j < länge; j++) {
-		if (wert == *Eingabe) {
+		if (wert == *Test) {
 			anz++;
 		}
-		Eingabe++;
+		Test++;
 	}
-	cout << anz << endl;
+	cout << wert << " : " << anz << endl;
 	return anz;
 }

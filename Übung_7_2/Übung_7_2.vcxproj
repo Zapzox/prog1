@@ -139,7 +139,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Roboter.cpp" />
     <ClCompile Include="Übung_7_2.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Roboter.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

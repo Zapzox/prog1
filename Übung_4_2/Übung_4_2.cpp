@@ -20,7 +20,7 @@ int main()
 
     int i = 0;
     int zahlen[10000];
-
+    
     while (u <= o) {
         bool is_prime = true;
         for (int i = 2; i < u; i++) {
