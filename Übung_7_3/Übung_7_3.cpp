@@ -3,7 +3,8 @@
 int main()
 {
     //Spielfeld
-    //Spieler
-    //Gegner
+    //Figur
+        //-->Spieler
+        //-->Gegner
     //Bombe
 }
