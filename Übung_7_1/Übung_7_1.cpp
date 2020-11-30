@@ -6,9 +6,10 @@ using namespace Statistik;
 
 int main() {
 	long Eingabe[] = { 1,3,2,3,5,3,4 };
-    /*long dataArray[] = { 1,3,2,3,5,3,4 };
-    
+
+    /*long dataArray[] = { 1,3,2,3,5,3};
     int sizeArray = (sizeof(dataArray) / sizeof(long));
+
     for (int k = 0; k < sizeArray; k++) {
         cout << dataArray[k] << ",";
     }
