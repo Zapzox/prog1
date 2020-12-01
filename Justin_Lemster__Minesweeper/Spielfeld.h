@@ -1,4 +1,5 @@
 #pragma once
+
 class Spielfeld
 {
 public:
@@ -6,8 +7,9 @@ public:
 	int m_laengeY = 0;
 	int m_MinenAnz = 0;
 
-	Spielfeld();
 	Spielfeld(int x, int y, int m);
+	void Ausgabenfeld(int x, int y);
+	void Minenfeld(int x, int y, int m);
 	void Ausgabe();
 };
 

@@ -12,7 +12,7 @@ void Menü() {
 	SetConsoleCP(1252);
 
 	int Schwierigkeitsgrad = 0;
-	Anzeige = new Spielfeld;
+	Spielfeld *Anzeige = nullptr;
 
 	cout << setfill(' ');
 	cout << "Willkommen bei Minesweeper!" << endl << endl
@@ -27,13 +27,13 @@ void Menü() {
 
 	switch (Schwierigkeitsgrad) {
 	case 1:
-		Anzeige(9, 9, 10);
+		Anzeige = new Spielfeld(9, 9, 10);
 		break;
 	case 2:
-		Anzeige(16, 16, 40);
+		Anzeige = new Spielfeld(16, 16, 40);
 		break;
 	case 3:
-		Anzeige(16, 24, 99);
+		Anzeige = new Spielfeld(16, 24, 99);
 		break;
 	case 4:
 		bool RichtigeEingabe = false;
@@ -94,7 +94,7 @@ void Menü() {
 			}
 		}
 		//Spielfeld generieren
-		Anzeige(x, y, Minen);
+		Anzeige = new Spielfeld(x, y, Minen);
 		break;
 	}
 }
