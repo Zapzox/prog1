@@ -94,9 +94,10 @@ void Spielfeld::Minenfeld(int x, int y, int m, string** Feld) {
 	}
 	Ausgabe(x,y,Feld);
 	cout << endl;
-
+	cout << x << endl;
+	cout << y << endl << endl;
 	for (int i = 2; i < x; i++) {
-		for (int j = 2; j < x; j++) {
+		for (int j = 2; j < y; j++) {
 			if (Feld[i][j]!="X") {
 				Feld[i][j] = getMinZahl(i, j, Feld);
 			}
@@ -107,9 +108,10 @@ void Spielfeld::Minenfeld(int x, int y, int m, string** Feld) {
 
 string Spielfeld::getMinZahl(int x, int y, string** Feld) {
 	int anz = 0;
-	int maxY = m_laengeX + 2;
-	int maxX = m_laengeY + 2;
+	int maxX = m_laengeX + 2;
+	int maxY = m_laengeY + 2;
 
+	cout << "X: " << maxX << "Y: " << maxY << endl;
 	cout << "X: " << x << "Y: " << y<< endl;
 
 	int xL = x - 1;

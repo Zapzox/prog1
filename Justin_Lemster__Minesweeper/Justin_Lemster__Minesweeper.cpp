@@ -22,7 +22,7 @@ int main()
 		<< setw(9) << left << "     Stufe " << "|" << setw(9) << right << "Minen" << "|" << setw(9) << right << "Größe" << "|" << endl
 		<< setw(9) << left << "(1) Leicht " << "|" << setw(9) << right << "10" << "|" << setw(9) << right << "9x9" << "|" << endl
 		<< setw(9) << left << "(2) Mittel " << "|" << setw(9) << right << "40" << "|" << setw(9) << right << "16x16" << "|" << endl
-		<< setw(9) << left << "(3) Schwer " << "|" << setw(9) << right << "99" << "|" << setw(9) << right << "16x24" << "|" << endl
+		<< setw(9) << left << "(3) Schwer " << "|" << setw(9) << right << "150" << "|" << setw(9) << right << "26x26" << "|" << endl
 		<< setw(9) << left << "(4) Custom " << "|" << setw(9) << right << "?" << "|" << setw(9) << right << "?" << "|" << endl << endl
 		<< "Eingabe: ";
 	cin >> Schwierigkeitsgrad;
@@ -35,7 +35,7 @@ int main()
 		Anzeige = new Spielfeld(16, 16, 40);
 		break;
 	case 3:
-		Anzeige = new Spielfeld(20, 20, 99);
+		Anzeige = new Spielfeld(26, 26, 150);
 		break;
 	case 4:
 		bool RichtigeEingabe = false;
@@ -46,10 +46,10 @@ int main()
 		//X-Achse Eingabe
 		while (RichtigeEingabe == false) {
 			system("cls");
-			cout << "X-Achse (Maximal 24, Minimal 2)" << endl
+			cout << "X-Achse (Maximal 26, Minimal 2)" << endl
 				<< "Eingabe: ";
 			cin >> x;
-			if (x >= 2 && x <= 24){
+			if (x >= 2 && x <= 26){
 				RichtigeEingabe = true;
 			}
 			else {
@@ -63,10 +63,10 @@ int main()
 		//Y-Achse Eingabe
 		while (RichtigeEingabe == false) {
 			system("cls");
-			cout << "Y-Achse (Maximal 24, Minimal 2)" << endl
+			cout << "Y-Achse (Maximal 26, Minimal 2)" << endl
 				<< "Eingabe: ";
 			cin >> y;
-			if (y >= 2 && y<=24) {
+			if (y >= 2 && y<=26) {
 				RichtigeEingabe = true;
 			}
 			else {
