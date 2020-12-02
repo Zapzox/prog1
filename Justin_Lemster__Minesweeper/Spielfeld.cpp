@@ -34,6 +34,10 @@ int Spielfeld::getLaengeX() {
 	return m_laengeX;
 }
 
+int getLaengeX() {
+	return m_laengeX;
+}
+
 void Spielfeld::Ausgabenfeld(int x, int y, char **Feld) {
 	char alph = 'A';
 	
@@ -74,10 +78,12 @@ void Spielfeld::Ausgabenfeld(int x, int y, char **Feld) {
 void Spielfeld::Minenfeld(int x, int y, int m, char** Feld) {
 	int f1 = 0;
 	int f2 = 0;
+	char test = ' ';
 	while (m!=0) {
 		f1 = ZufallszahlI(2,x);
 		f2 = ZufallszahlI(2,y);
-			if (Feld[f1][f2]!='X') {
+		test = Feld[f1][f2];
+			if (test == 'X') {
 				Feld[f1][f2] = 'X';
 				m--;
 			}

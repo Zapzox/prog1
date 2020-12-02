@@ -14,6 +14,8 @@ public:
 	char** getArray();
 	int getLaengeX();
 	int getMinZahl(int x, int y, char** Feld);
+
+	void leeresFeld(char** Feld);
 	void Ausgabenfeld(int x, int y, char** Feld);
 	void Minenfeld(int x, int y, int m, char** Feld);
 	void Ausgabe(int laengeX,char** Feld);
