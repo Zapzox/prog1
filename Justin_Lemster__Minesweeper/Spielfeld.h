@@ -1,23 +1,27 @@
+#include <iostream>
+#include <string>
 #pragma once
+
+using namespace std;
 
 int ZufallszahlI(int untereGrenze, int obereGrenze);
 
 class Spielfeld
 {
 public:
-	int m_laengeX = 0;
-	int m_laengeY = 0;
-	int m_MinenAnz = 0;
+	int m_laengeX;
+	int m_laengeY;
+	int m_MinenAnz;
 	char** Feld;
 
 	Spielfeld(int x, int y, int m);
 	char** getArray();
 	int getLaengeX();
-	int getMinZahl(int x, int y, char** Feld);
+	string getMinZahl(int x, int y, string** Feld);
 
-	void leeresFeld(char** Feld);
-	void Ausgabenfeld(int x, int y, char** Feld);
-	void Minenfeld(int x, int y, int m, char** Feld);
-	void Ausgabe(int laengeX,char** Feld);
+	void leeresFeld(int x, int y, string** Feld);
+	void Ausgabenfeld(int x, int y, string** Feld);
+	void Minenfeld(int x, int y, int m, string** Feld);
+	void Ausgabe(int x, int y, string**Feld);
 };
 

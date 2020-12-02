@@ -8,6 +8,7 @@ using namespace std;
 
 int main()
 {
+	srand(static_cast<unsigned>(time(0)));
 	//Umlaute in der Konsole
 	SetConsoleOutputCP(1252);
 	SetConsoleCP(1252);
@@ -102,6 +103,5 @@ int main()
 
 
 	long Stopuhr = 0;
-
 	
 }
