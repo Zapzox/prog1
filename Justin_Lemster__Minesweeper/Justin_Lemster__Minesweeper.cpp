@@ -6,7 +6,8 @@
 
 using namespace std;
 
-void Menü() {
+int main()
+{
 	//Umlaute in der Konsole
 	SetConsoleOutputCP(1252);
 	SetConsoleCP(1252);
@@ -33,7 +34,7 @@ void Menü() {
 		Anzeige = new Spielfeld(16, 16, 40);
 		break;
 	case 3:
-		Anzeige = new Spielfeld(16, 24, 99);
+		Anzeige = new Spielfeld(20, 20, 99);
 		break;
 	case 4:
 		bool RichtigeEingabe = false;
@@ -82,8 +83,8 @@ void Menü() {
 				<< "Eingabe: ";
 			cin >> Minen;
 			//Felderanzahl
-			Rechnung = x * y;
-			if (Rechnung/2 <= Minen && Minen > 0) {
+			Rechnung = (x * y) / 2;
+			if (Rechnung >= Minen && Minen > 0) {
 				RichtigeEingabe = true;
 			}
 			else {
@@ -95,14 +96,12 @@ void Menü() {
 		}
 		//Spielfeld generieren
 		Anzeige = new Spielfeld(x, y, Minen);
+		
 		break;
 	}
-}
 
 
-int main()
-{
-	long Stopuhr;
-	Menü();
+	long Stopuhr = 0;
+
 	
 }

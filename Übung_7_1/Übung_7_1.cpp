@@ -40,4 +40,6 @@ int main() {
 	int länge = (sizeof(Eingabe) / sizeof(long));
 	Rechner einRechner;
 	einRechner.SetterArr(Eingabe, länge);
+
+    return 0;
 }
