@@ -144,7 +144,6 @@ void Spielfeld::Minenfeld(int x, int y, int m, string** Feld) {
 			}
 		}
 	}
-	Ausgabe(x,y,Feld);
 }
 
 string Spielfeld::getMinZahl(int x, int y, string** Feld) {
@@ -363,7 +362,7 @@ int ZufallszahlI(int untereGrenze, int obereGrenze)
 }
 
 void Spielfeld::Ausgabe(int x, int y, string**Feld) {
-	//system("cls");
+	system("cls");
 	for (int i = 0; i < x; ++i) {
 		for (int j = 0; j < y; ++j) {
 			cout << Feld[i][j];
