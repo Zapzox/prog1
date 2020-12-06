@@ -11,8 +11,6 @@ Spielfeld::Spielfeld(int x, int y, int m) {
 	system("cls");
 	m_GameOver = false;
 	m_Win = false;
-	m_laengeX = x;
-	m_laengeY = y;
 	m_MaxlaengeX = x + 2;
 	m_MaxlaengeY = y + 2;
 	m_MinenAnz = m;

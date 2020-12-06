@@ -12,16 +12,14 @@ public:
 	//Membervariablen
 	bool m_GameOver;
 	bool m_Win;
-	int m_laengeX;
-	int m_laengeY;
 	int m_MaxlaengeX;
 	int m_MaxlaengeY;
 	int m_MinenAnz;
 	string** Anzeige;
 	string** Minen;
-	//Funktionen
+	//Konstruktor
 	Spielfeld(int x, int y, int m);
-	//getter und setter 
+	//getter und setter
 	string** getAnzeige();
 	string** getMinen();
 	int getLaengeX();
@@ -32,10 +30,12 @@ public:
 	void setWin(bool win);
 	string getMinZahl(int x, int y, string** Feld);
 	//Funktionen für das erstellen der dynamischen Arrays
+private:
 	void leeresFeld(int x, int y, string** Feld);
 	void Ausgabenfeld(int x, int y, string** Feld);
 	void Minenfeld(int x, int y, int m, string** Feld);
 	//Funktionen für den Spielverlauf
+public:
 	void Eingabe(int x, int y, string** Anzeige, string** Minen);
 	int EingabeUmwandeln(char um);
 	void Aufdecken(int x, int y, string** Anzeige, string** Minen);
