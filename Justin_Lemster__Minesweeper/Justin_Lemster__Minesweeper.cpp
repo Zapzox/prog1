@@ -22,8 +22,9 @@ int main()
 
 	while (nochmal == true) {
 		system("cls");
+		//Zeiger für das Spielfeld wird erstellt um dieses dann dynamisch zu erstellen
 		Spielfeld* Anzeige = nullptr;
-
+		//Menü zur Außwahl des Schwierigkeitsgrades
 		cout << setfill(' ');
 		cout << "Willkommen bei Minesweeper!" << endl << endl
 			<< "Wählen Sie einen Schwierigkeitsgrad / Modi:" << endl << endl
@@ -46,10 +47,13 @@ int main()
 			Anzeige = new Spielfeld(26, 26, 150);
 			break;
 		case 4:
+			//Falls die Parameter falsch eingegeben werden -> wird wiederhohlt
 			bool RichtigeEingabe = false;
+			// Variablen für die custom Eingabe der einzelen Parameter
 			int Minen = 0;
 			int x = 0;
 			int y = 0;
+			// Speichern der halben Minenanzahl
 			int Rechnung = 0;
 			//X-Achse Eingabe
 			while (RichtigeEingabe == false) {
@@ -57,6 +61,7 @@ int main()
 				cout << "X-Achse (Maximal 26, Minimal 2)" << endl
 					<< "Eingabe: ";
 				cin >> x;
+				// x muss größer 1 sein und kleiner als 27
 				if (x >= 2 && x <= 26) {
 					RichtigeEingabe = true;
 				}
@@ -74,6 +79,7 @@ int main()
 				cout << "Y-Achse (Maximal 26, Minimal 2)" << endl
 					<< "Eingabe: ";
 				cin >> y;
+				// y muss größer 1 sein und kleiner als 27
 				if (y >= 2 && y <= 26) {
 					RichtigeEingabe = true;
 				}
@@ -91,8 +97,9 @@ int main()
 				cout << "Minen (Maximal die Hälfte der entstehenden Felder, Minimal 1)" << endl
 					<< "Eingabe: ";
 				cin >> Minen;
-				//Felderanzahl
+				//Hälfte der Felderanzahl wird gepeichert
 				Rechnung = (x * y) / 2;
+				// Minen muss größer als 0 sein und höchstens die Hälfte der Felder sein
 				if (Rechnung >= Minen && Minen > 0) {
 					RichtigeEingabe = true;
 				}
@@ -109,50 +116,67 @@ int main()
 			break;
 		}
 
-		int test = 0;
 		char Zeile = 0;
 		char Spalte = 0;
 		int unaufgedeckteFelder = 0;
+		//Variable start wird auf die aktielle Zeit gesetzt
 		std::chrono::high_resolution_clock::time_point start = std::chrono::high_resolution_clock::now();
-
+		//Gameloop solange das Spiel nicht gewonne oder verloren laufe weiter
 		while (Anzeige->getGameOver() == false && Anzeige->getWin() == false) {
+			bool eingabe = false;
+			while (eingabe == false) {
+				cout << endl << "|Geben sie die Koordinaten von einem Feld an|"
+					<< endl << "Zeile: ";
+				cin >> Zeile;
 
-			cout << endl << "|Geben sie die Koordinaten von einem Feld an|"
-				<< endl << "Zeile: ";
-			cin >> Zeile;
-
-			cout << endl << "Spalte: ";
-			cin >> Spalte;
-			cout << endl;
-
+				cout << "Spalte: ";
+				cin >> Spalte;
+				cout << endl;
+				//wenn die Eingabe richtig ist gehe aus der while schleife raus
+				if (Zeile == 'a' || Spalte == 'a' || Zeile == 'b' || Spalte == 'b' || Zeile == 'c' || Spalte == 'c' || Zeile == 'd' || Spalte == 'd' || 
+					Zeile == 'e' || Spalte == 'e' || Zeile == 'f' || Spalte == 'f' || Zeile == 'g' || Spalte == 'g' || Zeile == 'h' || Spalte == 'h' || 
+					Zeile == 'i' || Spalte == 'i' || Zeile == 'j' || Spalte == 'j' || Zeile == 'k' || Spalte == 'k' || Zeile == 'l' || Spalte == 'l' || 
+					Zeile == 'm' || Spalte == 'm' || Zeile == 'n' || Spalte == 'n' || Zeile == 'o' || Spalte == 'o' || Zeile == 'p' || Spalte == 'p' || 
+					Zeile == 'q' || Spalte == 'q' || Zeile == 'r' || Spalte == 'r' || Zeile == 's' || Spalte == 's' || Zeile == 't' || Spalte == 't' || 
+					Zeile == 'u' || Spalte == 'u' || Zeile == 'v' || Spalte == 'v' || Zeile == 'w' || Spalte == 'w' || Zeile == 'x' || Spalte == 'x' || 
+					Zeile == 'y' || Spalte == 'y' || Zeile == 'z' || Spalte == 'z') {
+					eingabe = true;
+				}
+				system("cls");
+				//gibt das Array Anzeige aus
+				//getLaenge gibt die größe des Spielfeldes aus (mit 2 Feldern extra für Beschriftung und Grenze)
+				Anzeige->Ausgabe(Anzeige->getLaengeX(), Anzeige->getLaengeY(), Anzeige->getAnzeige());
+			}
+			//Aufruf der Eingabe Funktion mit den umgewandelten Parametern und den Arrays Anzeige und Mine
+			//EingabeUmwandeln -> wandelt Buchstaben in Zahlen um 
 			Anzeige->Eingabe(Anzeige->EingabeUmwandeln(Zeile), Anzeige->EingabeUmwandeln(Spalte), Anzeige->getAnzeige(), Anzeige->getMinen());
-
 			Anzeige->Ausgabe(Anzeige->getLaengeX(), Anzeige->getLaengeY(), Anzeige->getAnzeige());
-
+			//läuft das genze Array Anzeige durch und zählt für jedes # unaufgedeckteFelder hoch
 			for (int i = 0; i < Anzeige->getLaengeX(); ++i) {
 				for (int j = 0; j < Anzeige->getLaengeY(); ++j) {
 					if (Anzeige->getAnzeige()[i][j] == "#") {
 						unaufgedeckteFelder++;
 					}
 				}
-				cout << endl;
 			}
-
+			//wenn genau so viele unaufgedeckte Felder vorhanden sind wie Minen, dann hat man gewonnen
 			if (unaufgedeckteFelder == Anzeige->getMinenAnz()) {
 				Anzeige->setWin(true);
 			}
 			unaufgedeckteFelder = 0;
 		}
-
+		//Variable ende wird auf die aktielle Zeit gesetzt
 		std::chrono::high_resolution_clock::time_point ende = std::chrono::high_resolution_clock::now();
 		std::chrono::high_resolution_clock::duration diff = ende - start;
+		//speichern der Zeit
 		int ms = std::chrono::duration_cast<std::chrono::milliseconds>(diff).count();
 		int s = std::chrono::duration_cast<std::chrono::seconds>(diff).count();
 		int m = std::chrono::duration_cast<std::chrono::minutes>(diff).count();
 
 		char erneut;
+		//für falsche Eingaben
 		bool falsch  = true;
-
+		//Wenn gewonnen, dann gebe Die benötigte Zeit aus und frage nach einem erneuten Versuch
 		if (Anzeige->getWin() == true) {
 			while (falsch == true) {
 				system("cls");
