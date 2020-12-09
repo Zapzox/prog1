@@ -1,4 +1,4 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include<stdio.h>
 #include<math.h>
 #include <thread>        
@@ -14,7 +14,7 @@ Spielfeld::Spielfeld(int x, int y, int m) {
 	m_MaxlaengeX = x + 2;
 	m_MaxlaengeY = y + 2;
 	m_MinenAnz = m;
-	//m_MaxlaengeX und m_MaxlaengeY wurden erst später eingeführt, deswegen arbeite ich hier mit x und y 
+	//m_MaxlaengeX und m_MaxlaengeY wurden erst spÃ¤ter eingefÃ¼hrt, deswegen arbeite ich hier mit x und y 
 	x += 2;
 	y += 2;
 	//2D Array Anzeige erstellen
@@ -22,7 +22,7 @@ Spielfeld::Spielfeld(int x, int y, int m) {
 	for (int i = 0; i < x; i++) {
 		Anz[i] = new string[y];
 	}
-	//Array wird mit leeren Zeichen beschrieben und dann gefüllt. Der Pointer des 2D Arrays wird in einer Membervariable gespeichert
+	//Array wird mit leeren Zeichen beschrieben und dann gefÃ¼llt. Der Pointer des 2D Arrays wird in einer Membervariable gespeichert
 	leeresFeld(x, y, Anz);
 	Ausgabenfeld(x, y, Anz);
 	Anzeige = Anz;
@@ -32,7 +32,7 @@ Spielfeld::Spielfeld(int x, int y, int m) {
 	for (int j = 0; j < x; j++) {
 		Mine[j] = new string[y];
 	}
-	//Array wird mit leeren Zeichen beschrieben und dann gefüllt. Der Pointer des 2D Arrays wird in einer Membervariable gespeichert
+	//Array wird mit leeren Zeichen beschrieben und dann gefÃ¼llt. Der Pointer des 2D Arrays wird in einer Membervariable gespeichert
 	leeresFeld(x, y, Mine);
 	Minenfeld(x, y, m, Mine);
 	Minen = Mine;
@@ -71,7 +71,7 @@ void Spielfeld::setWin(bool win) {
 }
 
 void Spielfeld::leeresFeld(int x, int y, string** Feld) {
-	//geht das übergebene Array durch und setzt überall Punkte hin
+	//geht das Ã¼bergebene Array durch und setzt Ã¼berall Punkte hin
 	for (int i = 0; i < x; i++) {
 		for (int j = 0; j < y; j++) {
 			Feld[i][j] = '.';
@@ -99,7 +99,7 @@ void Spielfeld::Ausgabenfeld(int x, int y, string**Feld) {
 		alph++;
 		Feld[i][1] = '|';
 	}
-	//füllt die Spielfläche mit # -> kennzeichnet die unaufgedeckten Felder
+	//fÃ¼llt die SpielflÃ¤che mit # -> kennzeichnet die unaufgedeckten Felder
 	for (int i = 2; i < x; i++) {
 		for (int j = 2; j < y; j++) {
 			Feld[i][j] = '#';
@@ -120,22 +120,22 @@ void Spielfeld::Minenfeld(int x, int y, int m, string** Feld) {
 				m--;
 			}
 	}
-	//ruft für jedes Feld, welches keine Mine ist getMinZahl auf
+	//ruft fÃ¼r jedes Feld, welches keine Mine ist getMinZahl auf
 	for (int i = 2; i < x; i++) {
 		for (int j = 2; j < y; j++) {
 			if (Feld[i][j]!="X") {
-				Feld[i][j] = getMinZahl(i, j, Feld);
+				Feld[i][j] = MinZahl(i, j, Feld);
 			}
 		}
 	}
 }
 
-string Spielfeld::getMinZahl(int x, int y, string** Feld) {
+string Spielfeld::MinZahl(int x, int y, string** Feld) {
 	int anz = 0;
 	//speichert die Werte des Feldes links oben 
 	int xL = x - 1;
 	int yL = y - 1;
-	//geht alle 8 angrenzenden Fleder des übergebenen Feldes durch und zählt für jede vorhandene Mine anz hoch 
+	//geht alle 8 angrenzenden Fleder des Ã¼bergebenen Feldes durch und zÃ¤hlt fÃ¼r jede vorhandene Mine anz hoch 
 	for (int i = 0;i < 3 ;i++) {
 		for (int j = 0; j < 3; j++) {
 			if (2 <= xL && xL < m_MaxlaengeX && 2 <= yL && yL < m_MaxlaengeY) {
@@ -270,20 +270,20 @@ int Spielfeld::EingabeUmwandeln(char um) {
 }
 
 void Spielfeld::Eingabe(int x, int y, string**Anzeige, string**Minen) {
-	//wenn in dem ausgewählten Feld eine Mine ist ist das Spiel verloren
+	//wenn in dem ausgewÃ¤hlten Feld eine Mine ist ist das Spiel verloren
 	if (Minen[x][y] == "X") {
 		m_GameOver = true;
 	}
-	//wenn keine Mine oder Punkt (leeres Feld) ausgewählt wurde (dann ist es eine "Zahl") wird diese einfach aufgedeckt 
+	//wenn keine Mine oder Punkt (leeres Feld) ausgewÃ¤hlt wurde (dann ist es eine "Zahl") wird diese einfach aufgedeckt 
 	else if (Minen[x][y] != "X" && Minen[x][y] != ".") {
 		Anzeige[x][y] = Minen[x][y];
 	}
-	//wenn das ausgewählte Feld ein leeres Feld ist wird dieses aufgedeckt und das dazugehörige Minenfeld auf * gesetzt um dieses als aufgedeckt zu kennzeichnen
-	//anschließend wird für diese Feld Aufdecken aufgerufen
+	//wenn das ausgewÃ¤hlte Feld ein leeres Feld ist wird dieses aufgedeckt und das dazugehÃ¶rige Minenfeld auf * gesetzt um dieses als aufgedeckt zu kennzeichnen
+	//anschlieÃŸend wird fÃ¼r diese Feld Aufdecken aufgerufen
 	else if (Minen[x][y] == ".") {
 		Anzeige[x][y] = Minen[x][y];
 		Minen[x][y] = "*";
-		//kleiner Cheat für die Testläufe (Ausgabe des Minenfeldes) ^^
+		//kleiner Cheat fÃ¼r die TestlÃ¤ufe (Ausgabe des Minenfeldes) ^^
 		//Ausgabe(x, y, Anzeige);
 		Aufdecken(x,y,Anzeige,Minen);
 	}
@@ -295,8 +295,8 @@ void Spielfeld::Aufdecken(int x, int y, string** Anzeige, string** Minen) {
 	//speichert die Werte des Feldes links oben 
 	int xL = x - 1;
 	int yL = y - 1;
-	//geht alle 8 angrenzenden Fleder des übergebenen Feldes durch und wenn eines keine Minen und nicht schon als aufgedeckt makiert ist wird für dieses Feld Eingabe aufgerufen
-	//somit wird das Feld aufgedeckt und ggf. noch weiter angrenzende Fleder aufgedeckt nzw. erneut Aufdecken für diese aufgerufen
+	//geht alle 8 angrenzenden Fleder des Ã¼bergebenen Feldes durch und wenn eines keine Minen und nicht schon als aufgedeckt makiert ist wird fÃ¼r dieses Feld Eingabe aufgerufen
+	//somit wird das Feld aufgedeckt und ggf. noch weiter angrenzende Fleder aufgedeckt nzw. erneut Aufdecken fÃ¼r diese aufgerufen
 	for (int i = 0; i < 3; i++) {
 		for (int j = 0; j < 3; j++) {
 			if (2 <= xL && xL < m_MaxlaengeX && 2 <= yL && yL < m_MaxlaengeY) {
@@ -319,9 +319,18 @@ int ZufallszahlI(int untereGrenze, int obereGrenze) {
 void Spielfeld::Ausgabe(int x, int y, string**Feld) {
 	//cleart die Konsole
 	system("cls");
-	//gibt das übergebene 2D Array aus in der Konsole aus (eigentlich nur Anzeige)
+	//gibt das Ã¼bergebene 2D Array aus in der Konsole aus (eigentlich nur Anzeige)
 	for (int i = 0; i < x; ++i) {
 		for (int j = 0; j < y; ++j) {
+			cout << Feld[i][j];
+		}
+		cout << endl;
+	}
+}
+
+void Spielfeld::cheat(string** Feld) {
+	for (int i = 0; i < m_MaxlaengeX; ++i) {
+		for (int j = 0; j < m_MaxlaengeY; ++j) {
 			cout << Feld[i][j];
 		}
 		cout << endl;

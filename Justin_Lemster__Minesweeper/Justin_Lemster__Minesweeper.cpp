@@ -24,9 +24,17 @@ int main()
 		system("cls");
 		//Zeiger für das Spielfeld wird erstellt um dieses dann dynamisch zu erstellen
 		Spielfeld* Anzeige = nullptr;
-		//Menü zur Außwahl des Schwierigkeitsgrades
+		//Regeln zur Verständnis der Spielmechanik
 		cout << setfill(' ');
 		cout << "Willkommen bei Minesweeper!" << endl << endl
+			<< "Regeln:" << endl
+			<< "1. Wähle deinen Spielmodus aus" << endl
+			<< "2. Gebe die Zeile und Spalte des Feldes in Kleinbuchstaben an (a,b,c,...,z)" << endl
+			<< "3. Ein Punkt '.' steht für ein leeres Feld" << endl
+			<< "4. Die Kleinbuchstaben im Spielfeld stehen für die Anzahl der in der Nähe liegenden Bomben (a=1, b=2,...h=8)" << endl
+			<< "5. Wenn eine Bombe getroffen/aufgedeckt wird ist das Spiel vorbei" << endl
+			<< "6. Viel Spaß beim Spielen und Highscore knacken!" << endl << endl
+		//Menü zur Außwahl des Schwierigkeitsgrades
 			<< "Wählen Sie einen Schwierigkeitsgrad / Modi:" << endl << endl
 			<< setw(9) << left << "     Stufe " << "|" << setw(9) << right << "Minen" << "|" << setw(9) << right << "Größe" << "|" << endl
 			<< setw(9) << left << "(1) Leicht " << "|" << setw(9) << right << "10" << "|" << setw(9) << right << "9x9" << "|" << endl
@@ -37,6 +45,8 @@ int main()
 		cin >> Schwierigkeitsgrad;
 
 		switch (Schwierigkeitsgrad) {
+		default: 
+			return 0;
 		case 1:
 			Anzeige = new Spielfeld(9, 9, 10);
 			break;
@@ -146,11 +156,18 @@ int main()
 				//gibt das Array Anzeige aus
 				//getLaenge gibt die größe des Spielfeldes aus (mit 2 Feldern extra für Beschriftung und Grenze)
 				Anzeige->Ausgabe(Anzeige->getLaengeX(), Anzeige->getLaengeY(), Anzeige->getAnzeige());
+				
 			}
 			//Aufruf der Eingabe Funktion mit den umgewandelten Parametern und den Arrays Anzeige und Mine
 			//EingabeUmwandeln -> wandelt Buchstaben in Zahlen um 
 			Anzeige->Eingabe(Anzeige->EingabeUmwandeln(Zeile), Anzeige->EingabeUmwandeln(Spalte), Anzeige->getAnzeige(), Anzeige->getMinen());
 			Anzeige->Ausgabe(Anzeige->getLaengeX(), Anzeige->getLaengeY(), Anzeige->getAnzeige());
+
+
+			//Cheat um das Minenfeld auszugeben 
+			Anzeige->cheat(Anzeige->getMinen());
+
+
 			//läuft das genze Array Anzeige durch und zählt für jedes # unaufgedeckteFelder hoch
 			for (int i = 0; i < Anzeige->getLaengeX(); ++i) {
 				for (int j = 0; j < Anzeige->getLaengeY(); ++j) {

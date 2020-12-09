@@ -28,17 +28,19 @@ public:
 	bool getGameOver();
 	bool getWin();
 	void setWin(bool win);
-	string getMinZahl(int x, int y, string** Feld);
 	//Funktionen für das erstellen der dynamischen Arrays
 private:
 	void leeresFeld(int x, int y, string** Feld);
 	void Ausgabenfeld(int x, int y, string** Feld);
 	void Minenfeld(int x, int y, int m, string** Feld);
+	string MinZahl(int x, int y, string** Feld);
 	//Funktionen für den Spielverlauf
 public:
 	void Eingabe(int x, int y, string** Anzeige, string** Minen);
 	int EingabeUmwandeln(char um);
 	void Aufdecken(int x, int y, string** Anzeige, string** Minen);
 	void Ausgabe(int x, int y, string**Feld);
+	//Cheat
+	void cheat(string** Feld);
 };
 
