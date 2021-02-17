@@ -18,24 +18,23 @@ Spielfeld::Spielfeld(int x, int y, int m) {
 	x += 2;
 	y += 2;
 	//2D Array Anzeige erstellen
-	string** Anz = new (string * [x]);
+	Anzeige = new (string * [x]);
 	for (int i = 0; i < x; i++) {
-		Anz[i] = new string[y];
+		Anzeige[i] = new string[y];
 	}
 	//Array wird mit leeren Zeichen beschrieben und dann gefüllt. Der Pointer des 2D Arrays wird in einer Membervariable gespeichert
-	leeresFeld(x, y, Anz);
-	Ausgabenfeld(x, y, Anz);
-	Anzeige = Anz;
+	leeresFeld(x, y, Anzeige);
+	Ausgabenfeld(x, y, Anzeige);
 
 	//2D Array Mine erstellen
-	string** Mine = new string * [x];
+	Minen = new string * [x];
 	for (int j = 0; j < x; j++) {
-		Mine[j] = new string[y];
+		Minen[j] = new string[y];
 	}
 	//Array wird mit leeren Zeichen beschrieben und dann gefüllt. Der Pointer des 2D Arrays wird in einer Membervariable gespeichert
-	leeresFeld(x, y, Mine);
-	Minenfeld(x, y, m, Mine);
-	Minen = Mine;
+	leeresFeld(x, y, Minen);
+	Minenfeld(x, y, m, Minen);
+
 }
 
 string** Spielfeld::getMinen() {
